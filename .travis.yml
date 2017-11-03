@@ -7,6 +7,8 @@ matrix:
       env: WITH_COVERALLS=true
     - jdk: oraclejdk9
     - jdk: openjdk7
+    - os: osx
+      osx_image: xcode8
 
 # skip installation step
 install: true
@@ -19,7 +21,7 @@ script:
  - if [ "$WITH_COVERALLS" == "true" ];
    then
      mvn -f com.examples.myproject/pom.xml clean verify -Pjacoco coveralls:report;
-   else
+   elif [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
      mvn -f com.examples.myproject/pom.xml clean verify;
    fi
 
