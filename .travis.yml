@@ -1,9 +1,12 @@
 language: java
 
-jdk:
-- oraclejdk8
-- oraclejdk9
-- openjdk7
+matrix:
+  fast_finish: true
+  include:
+    - jdk: oraclejdk8
+      env: WITH_COVERALLS=true
+    - jdk: oraclejdk9
+    - jdk: openjdk7
 
 # skip installation step
 install: true
@@ -13,6 +16,10 @@ cache:
   - $HOME/.m2
 
 script:
-- mvn -f com.examples.myproject/pom.xml clean verify -Pjacoco coveralls:report
-
+ - if [ "$WITH_COVERALLS" == "true" ];
+   then
+     mvn -f com.examples.myproject/pom.xml clean verify -Pjacoco coveralls:report;
+   else
+     mvn -f com.examples.myproject/pom.xml clean verify;
+   fi
 
