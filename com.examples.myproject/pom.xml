@@ -12,6 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jacoco.version>0.7.9</jacoco.version>
     <jacoco.data.file>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.data.file>
   	<jacoco.report.path>${project.reporting.outputDirectory}/jacoco-ut</jacoco.report.path>
   </properties>
